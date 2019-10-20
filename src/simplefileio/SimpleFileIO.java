@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -26,7 +27,8 @@ public class SimpleFileIO {
 		//System.out.println(retValDoors);
 		//MyFileIOBuff.readFromFile(filename);
 		//MyFileIOBuff.readFromFileChunks(filename);
-		MyFileIOBuff.readFromFileinBuffer(filename);
+		//MyFileIOBuff.readFromFileinBuffer(filename);
+		MyFileOut.writeFile(testString, filename);
 		
 	}
 	
@@ -63,6 +65,16 @@ public class SimpleFileIO {
 		}
 	}
 	
+	static class MyFileOut {
+		public static void writeFile(String str, String filename) throws IOException {
+			File fh = new File(filename);
+			FileWriter fw = new FileWriter(fh);
+			fw.write("her bor kurt\n");
+			fw.write("her bor anton\n");
+			fw.close();
+		}
+
+	}
 	
 	static class MyFileIO {
 		
