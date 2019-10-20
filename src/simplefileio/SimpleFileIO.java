@@ -15,6 +15,23 @@ public class SimpleFileIO {
 		MyFileIO.readFromFile(filename);
 	}
 	
+	static class StringParsing {
+		
+		public static void getNumOfDoors(String myString) {
+			/*
+			find tallet umiddelbart før dr - hvis dr forekommer
+			S80 2.5T 4dr
+			Focus ZX5 5dr
+			IS 300 4dr manual
+			Forester X
+			*/
+
+			
+			
+		}
+	}
+	
+	
 	static class MyFileIO {
 		
 		public static void readFromFile(String filename) throws FileNotFoundException {
