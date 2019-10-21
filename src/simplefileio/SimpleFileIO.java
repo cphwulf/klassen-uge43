@@ -11,23 +11,39 @@ public class SimpleFileIO {
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO code application logic here
-		filename = "Data/test.csv";
-		MyFileIO.readFromFile(filename);
+		filename = "Data/test2.csv";
+		FileImporter.readCarsCSV(filename);
+		String tmpDoor = StringParserHelper.getNumOfDoors("RX-8 4dr automatic");
+		System.out.println(tmpDoor);
+		
 	}
 	
-	static class MyFileIO {
-		
-		public static void readFromFile(String filename) throws FileNotFoundException {
-			File file = new File(filename);
-			Scanner myScanner = new Scanner(file);
+	static class StringParserHelper {
+		public static String getNumOfDoors(String carString) {
+			String retValDoors = "";
+			//RSX Type S 2dr
+			// MDX
+			//RX-8 4dr automatic
+			if (carString.contains("dr")) {
+				int idx = carString.indexOf("dr");
+		retValDoors = carString.substring(idx-1,idx);
+			}
+
+			return retValDoors;
+		}
+	}
+	
+	static class FileImporter {
+		public static void readCarsCSV(String filename) throws FileNotFoundException {
+			// bruge scanner
 			String line = "";
-			System.out.println("iinto write");
-			while (myScanner.hasNextLine()){
+			File fh = new File(filename);
+			Scanner myScanner = new Scanner(fh);
+			while(myScanner.hasNextLine()) {
 				line = myScanner.nextLine();
 				System.out.println(line);
 			}
-			
-			
+
 		}
 	}
 	
