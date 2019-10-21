@@ -21,7 +21,7 @@ public class SimpleFileIO {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// TODO code application logic here
 		filename = "Data/test3.csv";
-		filenameOut = "Data/test5.csv";
+		filenameOut = "Data/index.html";
 		filename = "Data/test2.csv";
 		filename = "Data/cars.csv";
 		//MyFileIO.readFromFile(filename);
@@ -38,7 +38,7 @@ public class SimpleFileIO {
 	
 	static class StringParsing {
 		public static void parseCarToHTML(String carString) throws IOException {
-			String filenameOut = "Data/test5.csv";
+			String filenameOut = "Data/index.html";
 			String retVal = "";
 			// 3;Acura;TSX 4dr;4;200;22;29;3230;105;1999;239831;
 			String[] myLineArr = carString.split(";");
@@ -150,14 +150,13 @@ public class SimpleFileIO {
 			//FileReader myRead = new FileReader(filename);
 			FileReader myRead = new FileReader(filename);
 			BufferedReader br = new BufferedReader(myRead);
-			String filenameOut = "Data/test5.csv";
+			String filenameOut = "Data/index.html";
 			String line;
 			line = br.readLine();
 			while ((line = br.readLine()) != null) {
 				System.out.println(line);
 				//MyFileOut.writeFileHTML(line, filenameOut);
 				StringParsing.parseCarToHTML(line);
-				
 			}
 			br.close();
 		}
