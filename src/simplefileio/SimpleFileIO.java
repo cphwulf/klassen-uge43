@@ -39,10 +39,19 @@ public class SimpleFileIO {
 	static class FileExporter {
 		public static void makeHTML(String line, String filename) throws IOException {
 			// "Data/index.html"
+			//2;Acura;RSX Type S 2dr;4;200;24;31;2778;101;1998;12000
+			String outString = "";
+
+
 			File fh = new File(filename);
 			FileWriter fw = new FileWriter(fh,true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(line);
+			String[] myArr = line.split(";");
+			// fixe doors
+			outString += "<li>"+myArr[1]+"</li>";
+			outString += "<li>"+myArr[10]+"</li>";
+			outString += "<li>" + StringParserHelper.getNumOfDoors(myArr[2]) + "</li>";
+			bw.write(outString);
 			bw.newLine();
 			bw.close();
 		} 
