@@ -25,6 +25,30 @@ public class Dog {
 		this.cityOrigin = cityOrigin;
 	}
 
+	public Dog() {
+
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public String getRace() {
+		return race;
+	}
+
+	public String getCityOrigin() {
+		return cityOrigin;
+	}
+
 	@Override
 	public String toString() {
 		String msg = "";
@@ -37,5 +61,7 @@ public class Dog {
 
 		return msg;
 	}
+
+	
 	
 }

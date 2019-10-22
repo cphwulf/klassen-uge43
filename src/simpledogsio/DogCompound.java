@@ -21,15 +21,38 @@ public class DogCompound {
 		this.name = name;
 		this.compoundDogs = new ArrayList<>();
 	}
+	public DogCompound() 
+	{
+
+	}
 
 	public void addDog(Dog dog) {
 		compoundDogs.add(dog);
+	}
+
+	public DogCompound getCompoundFromId(String idString) {
+		DogCompound tmpCompound = null;
+		if (this.id == idString) {
+			return this;
+		} else {
+			return tmpCompound;
+		}
 	}
 
 	public void showDogs() {
 		for(Dog dog : compoundDogs) {
 			System.out.println(dog);
 		}
+	}
+	public ArrayList<Dog> getDog(String name) {
+		ArrayList<Dog> retValDogs = new ArrayList<>();
+		for (Dog dog : compoundDogs) {
+			if (dog.getName().contains(name)) {
+				retValDogs.add(dog);
+			}
+		}
+		return retValDogs;
+
 	}
 	
 }
