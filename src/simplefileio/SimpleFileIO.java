@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SimpleFileIO {
 	
@@ -18,7 +20,7 @@ public class SimpleFileIO {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+	public static void main(String[] args) {
 		// TODO code application logic here
 		filename = "Data/test3.csv";
 		filenameOut = "Data/index.html";
@@ -132,20 +134,30 @@ public class SimpleFileIO {
 			System.out.println(Arrays.toString(retValCArr));
 		}
 		
-		public static void readFromFileinBuffer(String filename) throws FileNotFoundException, IOException {
+		public static void readFromFileinBuffer(String filename) {
 			//2;Acura;RSX Type S 2dr;4;200;24;31;2778;101;1998;12000
 			//FileReader myRead = new FileReader(filename);
-			FileReader myRead = new FileReader(filename);
+			
+			FileReader myRead = null;
+			try {
+				myRead = new FileReader(filename);
+			} catch (FileNotFoundException ex) {
+				Logger.getLogger(SimpleFileIO.class.getName()).log(Level.SEVERE, null, ex);
+			}
 			BufferedReader br = new BufferedReader(myRead);
 			String filenameOut = "Data/index.html";
 			String line;
-			line = br.readLine();
-			while ((line = br.readLine()) != null) {
-				System.out.println(line);
-				//MyFileOut.writeFileHTML(line, filenameOut);
-				StringParsing.parseCarToHTML(line);
+			try {
+				line = br.readLine();
+				while ((line = br.readLine()) != null) {
+					System.out.println(line);
+					//MyFileOut.writeFileHTML(line, filenameOut);
+					StringParsing.parseCarToHTML(line);
+				}
+				br.close();
+			} catch (IOException ex) {
+				System.out.println("problem med "+ filename);
 			}
-			br.close();
 		}
 	}
 }
