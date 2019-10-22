@@ -51,8 +51,8 @@ public class SimpleFileIO {
 			MyFileOut.writeFileHTML(retVal, filenameOut);
 		}
 		
-		public static int getNumOfDoors(String myString) {
-			int retVal = 0;
+		public static String getNumOfDoors(String myString) {
+			String retValDoors = null;
 			/*
 			find tallet umiddelbart før dr - hvis dr forekommer
 			S80 2.5T 4dr
@@ -61,23 +61,10 @@ public class SimpleFileIO {
 			Forester X
 			*/
 			if (myString.contains("dr")) {
-				String[] myLineArr = myString.split(" ");
-				for (int i=0; i< myLineArr.length;i++) {
-					if (myLineArr[i].contains("dr")) {
-						String tmpStr = myLineArr[i];
-						System.out.println("into action" + tmpStr);
-						char[] myChars = tmpStr.toCharArray();
-						for (int j=0;j<myChars.length;j++ ) {
-							if (myChars[j] < 57) {
-								retVal=myChars[j]-48;
-							}
-						}
-					}
-					
-				}
-				
+				int idx = myString.indexOf("dr");
+				retValDoors = myString.substring(idx-1,idx);
 			}
-			return retVal;
+			return retValDoors;
 			
 		}
 	}
