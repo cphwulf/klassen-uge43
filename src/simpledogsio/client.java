@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author thor
  */
 public class client {
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) {
 		String filename = "Data/test2.csv";
 		ImportDogsFromFile.importDogsFromCSV(filename);
 	}

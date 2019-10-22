@@ -17,7 +17,6 @@ public class ImportDogsFromFile {
 	//Red,Dobermann,AMY,Desexed Female,WATERLOO CORNER
 	// Dog(String name, String gender, String color, String race, String cityOrigin)
 	public static void importDogsFromCSV(String filename) {
-		filename = "test";
 		DogCompound myCompound = new DogCompound("C10", "Kurt");
 		String line = "";
 		File fh = new File(filename);
