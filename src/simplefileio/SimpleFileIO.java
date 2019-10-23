@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SimpleFileIO {
 	
@@ -18,26 +20,26 @@ public class SimpleFileIO {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+	public static void main(String[] args) {
 		// TODO code application logic here
 		filename = "Data/test3.csv";
 		filenameOut = "Data/index.html";
-		filename = "Data/test2.csv";
-		filename = "Data/cars.csv";
-		//MyFileIO.readFromFile(filename);
+		//filename = "Data/test2.csv";
+		//filename = "Data/cars.csv";
+		MyFileIO.readFromFile(filename);
 		String testString = "S80 34 2.5T 4dr";
-		//int retValDoors = StringParsing.getNumOfDoors(testString);
-		//int retValDoors = 5;
-		//System.out.println(retValDoors);
-		//MyFileIOBuff.readFromFile(filename);
-		//MyFileIOBuff.readFromFileChunks(filename);
+		String retValDoors = StringParsing.getNumOfDoors(testString);
+		retValDoors = "5";
+		System.out.println(retValDoors);
+		MyFileIOBuff.readFromFile(filename);
+		MyFileIOBuff.readFromFileChunks(filename);
 		MyFileIOBuff.readFromFileinBuffer(filename);
-		//MyFileOut.writeFile(testString, filename);
+		MyFileOut.writeFile(testString, filename);
 		
 	}
 	
 	static class StringParsing {
-		public static void parseCarToHTML(String carString) throws IOException {
+		public static void parseCarToHTML(String carString) {
 			String filenameOut = "Data/index.html";
 			String retVal = "";
 			// 3;Acura;TSX 4dr;4;200;22;29;3230;105;1999;239831;
@@ -70,82 +72,121 @@ public class SimpleFileIO {
 	}
 	
 	static class MyFileOut {
-		public static void writeFile(String str, String filename) throws IOException {
+		public static void writeFile(String str, String filename) {
 			File fh = new File(filename);
-			FileWriter fw = new FileWriter(fh);
-			fw.write("her bor kurt\n");
-			fw.write("her bor anton\n");
-			fw.close();
+			try {
+				FileWriter fw = new FileWriter(fh);
+				fw.write('a' + "her bor kurt\n" + 'a');
+				fw.write("her bor anton\n");
+				fw.close();
+			} catch (Exception e) {
+				System.out.println("Error: " + e.toString());
+			}
 		}
 		
 		
-		public static void writeFileHTML(String str, String filename) throws IOException {
+		public static void writeFileHTML(String str, String filename) {
 			File fh = new File(filename);
-			FileWriter fw = new FileWriter(fh,true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			String tmpString = "<html><body>\n";
-			tmpString += str;
-			tmpString += "</body></html>\n";
-			bw.write(tmpString);
-			bw.newLine();
-			bw.close();
+			FileWriter fw = null;
+			try {
+				fw = new FileWriter(fh,true);
+			} catch (IOException e) {
+				System.out.println("Error on " + filename + " " + e.toString());
+			}
+			try {
+				BufferedWriter bw = new BufferedWriter(fw);
+				String tmpString = "<html><body>\n";
+				tmpString += str;
+				tmpString += "</body></html>\n";
+				bw.write(tmpString);
+				bw.newLine();
+				bw.close();
+				
+			}
+			catch (Exception e) {
+				System.out.println("");
+			}
 		}
 	}
 	
 	static class MyFileIO {
 		
-		public static void readFromFile(String filename) throws FileNotFoundException {
+		public static void readFromFile(String filename) {
 			File file = new File(filename);
-			Scanner myScanner = new Scanner(file);
-			String line = "";
-			while (myScanner.hasNextLine()){
-				line = myScanner.nextLine();
-				System.out.println(line);
+			try {
+				Scanner myScanner = new Scanner(file);
+				String line = "";
+				while (myScanner.hasNextLine()){
+					line = myScanner.nextLine();
+					System.out.println(line);
+				}
+			} catch (Exception e) {
+				System.out.println("Error: " + e.toString());
 			}
 		}
 	}
 	static class MyFileIOBuff {
-		public static void readFromFile(String filename) throws FileNotFoundException, IOException {
+		public static void readFromFile(String filename) {
 			//2;Acura;RSX Type S 2dr;4;200;24;31;2778;101;1998;12000
 			//FileReader myRead = new FileReader(filename);
-			FileReader myRead = new FileReader(filename);
-			int counter = 0;
-			int retVal = 0;
-			char retValC;
-			while ( myRead.read() != -1) {
-				counter++;
-				retVal = myRead.read();
-				retValC = (char) retVal;
-				System.out.print(retValC + " " + counter + " ");
-				System.out.println(retVal);
-				
+			FileReader myRead = null;
+			try {
+				myRead = new FileReader(filename);
+				int counter = 0;
+				int retVal = 0;
+				char retValC;
+				while ( myRead.read() != -1) {
+					counter++;
+					retVal = myRead.read();
+					retValC = (char) retVal;
+					System.out.print(retValC + " " + counter + " ");
+					System.out.println(retVal);
+					
+				}
+			} catch (Exception e) {
+				System.out.println("Error reading "+ filename);
 			}
 		}
-		public static void readFromFileChunks(String filename) throws FileNotFoundException, IOException {
+		public static void readFromFileChunks(String filename) {
 			//2;Acura;RSX Type S 2dr;4;200;24;31;2778;101;1998;12000
 			//FileReader myRead = new FileReader(filename);
+			try {
+				
 			FileReader myRead = new FileReader(filename);
 			int counter = 0;
 			int retVal = 0;
 			char[] retValCArr = new char[1024];
 			int charsRead = myRead.read(retValCArr, 0, 1024);
 			System.out.println(Arrays.toString(retValCArr));
+			} catch (Exception e) {
+				System.out.println("Error reading " + filename);
+			}
 		}
 		
-		public static void readFromFileinBuffer(String filename) throws FileNotFoundException, IOException {
+		public static void readFromFileinBuffer(String filename) {
 			//2;Acura;RSX Type S 2dr;4;200;24;31;2778;101;1998;12000
 			//FileReader myRead = new FileReader(filename);
-			FileReader myRead = new FileReader(filename);
-			BufferedReader br = new BufferedReader(myRead);
-			String filenameOut = "Data/index.html";
-			String line;
-			line = br.readLine();
-			while ((line = br.readLine()) != null) {
-				System.out.println(line);
-				//MyFileOut.writeFileHTML(line, filenameOut);
-				StringParsing.parseCarToHTML(line);
+			FileReader myRead = null;
+			try {
+				myRead = new FileReader(filename);
+			} catch (FileNotFoundException ex) {
+				System.out.println("error " + filename);
 			}
-			br.close();
+			
+			try {
+				BufferedReader br = new BufferedReader(myRead);
+				String filenameOut = "Data/index.html";
+				String line;
+				line = br.readLine();
+				while ((line = br.readLine()) != null) {
+					System.out.println(line);
+					//MyFileOut.writeFileHTML(line, filenameOut);
+					StringParsing.parseCarToHTML(line);
+				}
+				br.close();
+			} catch (Exception e) {
+				System.out.println(" problmer in " + e.toString() );
+			}
 		}
 	}
 }
