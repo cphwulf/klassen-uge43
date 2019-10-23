@@ -1,8 +1,8 @@
 # Uge 43:  Exceptions
 ## Mandag 
 ## Tirsdag 
-### Branch scratch indeholder exemplet med egen exception
-### Branch sixthiter er simpleio med throws erstattet af try/catch
+#### Branch scratch indeholder exemplet med egen exception
+#### Branch sixthiter er simpleio med throws erstattet af try/catch
 
 
 
