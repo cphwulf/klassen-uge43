@@ -1,6 +1,10 @@
-# Mandag Uge43
-# Tirsdag Uge43
-## Exceptions
+# Uge 43:  Exceptions
+## Mandag 
+## Tirsdag 
+### Branch scratch indeholder exemplet med egen exception
+### Branch sixthiter er simpleio med throws erstattet af try/catch
+
+
 
 1.SimpleDog med try catch
 2.Simple FileIO med try catch
